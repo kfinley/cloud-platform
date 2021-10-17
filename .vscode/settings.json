@@ -1,0 +1,15 @@
+{
+  "dotnet-test-explorer.enableTelemetry": false,
+  "dotnet-test-explorer.testProjectPath": "**/*Tests.csproj",
+  "storyExplorer.storiesGlobs": [
+    "packages/vue2-accounts/src/stories/*.stories.ts",
+    "packages/vue2-budget-manager/src/stories/*.stories.ts",
+    "packages/vue2-common/src/stories/*.stories.ts",
+    "packages/vue2-expenses/src/stories/*.stories.ts",
+    "packages/vue2-notify/src/stories/*.stories.ts",
+    "packages/vue2-transactions/src/stories/*.stories.ts",
+    "packages/vue2-user/src/stories/*.stories.ts"
+  ],
+  "storyExplorer.server.internal.enabled": false,
+  "storyExplorer.server.external.url": "http://localhost:6007",
+}

@@ -1,0 +1,29 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build-user-service",
+      "type":"shell",
+      "command": "docker stop cloud-platform.user && dotnet build ${workspaceFolder}/services/User/User.sln && docker start cloud-platform.user ",
+      "problemMatcher": []
+    },
+    {
+      "label": "start-storybook: vue2-components-plugin",
+      "command": "npm run storybook:vue2-components",
+      "type": "shell",
+      "problemMatcher": []
+    },
+    {
+      "label": "start-storybook: vue2-notify",
+      "command": "npm run storybook:notify",
+      "type": "shell",
+      "problemMatcher": []
+    },
+    {
+      "label": "start-storybook: vue2-user",
+      "command": "npm run storybook:user",
+      "type": "shell",
+      "problemMatcher": []
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+name: Publish PR Storybooks
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - packages/vue2-*/src/stories/**
+      - packages/vue2-*/src/components/**
+
+jobs:
+  storybooks:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          path: branch
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+      - name: npm install and lerna bootstrap
+        run: |
+          cd $GITHUB_WORKSPACE/branch
+          npm install -g npm@latest
+          npm install silent
+          npm run bootstrap
+      - name: Build Storybooks
+        run: |
+          cd $GITHUB_WORKSPACE/branch
+          npm run deploy-storybook:local
+      - name: Copy static Storybooks to Pages
+        run: |
+          cd $GITHUB_WORKSPACE/branch
+          mkdir -p Pages/${{ github.head_ref }}
+          cp -r storybooks/* Pages/${{ github.head_ref }}
+      - name: Checkout storybooks
+        uses: actions/checkout@v2
+        with:
+          ref: storybooks
+          path: storybooks
+      - name: Commit Storybooks to storybooks branch #storybooks branch must exist
+        run: |
+          cd $GITHUB_WORKSPACE/storybooks
+          cp -R $GITHUB_WORKSPACE/branch/Pages/* .
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+          git add .
+
+          if git diff-index --quiet HEAD --; then
+              echo 'No changes to commit';
+          else
+            git commit -m "Deploying to GitHub Pages 🚀";
+            git push;
+          fi
+      - name: Add comment to PR with link to Storybooks
+        uses: actions/github-script@v4
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '🚀 Review the Storybooks for this PR at https://kfinley.github.io/Platform8/${{github.head_ref}}'
+            })

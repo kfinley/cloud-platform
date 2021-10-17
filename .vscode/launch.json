@@ -1,0 +1,38 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Attach to User API",
+      "type": "coreclr",
+      "request": "attach",
+      "processId": "${command:pickRemoteProcess}",
+      "pipeTransport": {
+        "pipeProgram": "docker",
+        "pipeArgs": ["exec", "-i", "cloud-platform.user"],
+        "quoteArgs": false,
+        "debuggerPath": "/vsdbg/vsdbg",
+        "pipeCwd": "${workspaceFolder}/services/User/Api"
+      }
+    },
+    {
+      "name": "Launch User Api",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build-user-service",
+      // If you have changed target frameworks, make sure to update the program path.
+      "program": "${workspaceFolder}/services/User/Api/bin/Debug/net5.0/User.Api.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/services/User/Api",
+      "stopAtEntry": false,
+      // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "\\bNow listening on:\\s+http://\\S+:([0-9]+)",
+        "uriFormat": "http://localhost:%s/swagger/index.html"
+      },
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  ]
+}

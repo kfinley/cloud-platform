@@ -1,0 +1,31 @@
+{
+    "compilerOptions": {
+      "baseUrl": ".",
+      "moduleResolution": "node",
+      "noUnusedLocals": true,
+      "noUnusedParameters": true,
+      "removeComments": true,
+      "sourceMap": true,
+      "target": "ES2020",
+      "outDir": "lib",
+      "experimentalDecorators": true,
+      "lib": [
+        "esnext"
+      ]
+    },
+    "include": [
+      "packages/**/*.ts",
+      "services/**/*.ts"
+    ],
+    "exclude": [
+      "node_modules/**/*",
+      ".serverless/**/*",
+      ".webpack/**/*",
+      "_warmup/**/*",
+      ".vscode/**/*"
+    ],
+    "ts-node": {
+      "require": ["tsconfig-paths/register"]
+    }
+  }
+  

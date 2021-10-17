@@ -1,0 +1,60 @@
+{
+  "name": "@cloud-platform/vue2-client",
+  "version": "0.0.1",
+  "description": "Vue2 client that uses @cloud-platform and custom Vue plugins.",
+  "private": true,
+  "author": {
+    "name": "Kyle Finley",
+    "email": "kyle@kylefinley.net"
+  },
+  "scripts": {
+    "dev": "vite",
+    "dev:docker": "vite --host 0.0.0.0 --port 8080",
+    "serve": "vite preview",
+    "build": "vue-tsc --noEmit && vite build",
+    "test:unit": "",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "bootstrap": "^5.1.1",
+    "bootstrap-icons": "^1.5.0",
+    "core-js": "^3.6.5",
+    "inversify-props": "^2.2.6",
+    "reflect-metadata": "^0.1.13",
+    "register-service-worker": "^1.7.1",
+    "vue": "^2.6.11",
+    "vue-class-component": "^7.2.3",
+    "vue-property-decorator": "^9.1.2",
+    "vue-router": "^3.2.0",
+    "vuex": "^3.6.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.0.2",
+    "@types/node": "14.17.27",
+    "@typescript-eslint/eslint-plugin": "^4.18.0",
+    "@typescript-eslint/parser": "^4.18.0",
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-pwa": "~4.5.0",
+    "@vue/cli-plugin-router": "~4.5.0",
+    "@vue/cli-plugin-typescript": "~4.5.0",
+    "@vue/cli-plugin-unit-jest": "~4.5.0",
+    "@vue/cli-plugin-vuex": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/eslint-config-prettier": "^6.0.0",
+    "@vue/eslint-config-typescript": "^7.0.0",
+    "@vue/test-utils": "^1.0.3",
+    "eslint": "^6.7.2",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-vue": "^6.2.2",
+    "node-sass": "^4.12.0",
+    "prettier": "^2.2.1",
+    "sass-loader": "^8.0.2",
+    "typescript": "~4.1.5",
+    "vite": "^2.6.2",
+    "vite-plugin-vue2": "^1.8.2",
+    "vue-template-compiler": "^2.6.11",
+    "webpack": "^4.45.0",
+    "css-loader": "~3.6.0"
+  }
+}

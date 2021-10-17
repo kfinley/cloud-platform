@@ -1,0 +1,85 @@
+service: Cloud-Platform
+
+frameworkVersion: "2"
+variablesResolutionMode: 20210326
+
+plugins:
+  - serverless-webpack
+  - serverless-dynamodb-local
+  - serverless-offline-sns
+  - serverless-s3-local
+  - serverless-step-functions
+  - serverless-offline-stepfunctions-plugin
+  - ./submodules/serverless-offline/ # (customized with .netcore 3.1 lambda support)
+
+custom:
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
+    excludeFiles: ./**/*.(spec|stories).ts
+
+  dynamodb:
+    stages:
+      - ${self:provider.stage}
+    start:
+      noStart: true
+      port: 8000
+      migrate: true
+      host: cloud-platform.dynamodb
+      seed: true
+      convertEmptyValues: true
+
+  serverless-offline-sns:
+    host: 0.0.0.0
+    accountId: 101010101010
+    debug: false
+
+  serverless-offline:
+    host: cloud-platform.sls
+    dotnetRunnerScript: .devcontainer/scripts/serverless-offline/invoke.ps1
+
+  s3:
+    serviceEndpoint: cloud-platform.sls
+    address: 0.0.0.0
+    host: cloud-platform.sls
+    directory: ./.devcontainer/.s3
+    port: 4569
+
+  offlineStepFunctions:
+    accountId: 101010101010
+    host: cloud-platform.sfn
+    port: 8083
+    region: us-east-1
+    functions:
+      GetConnection: WebSockets-GetConnection
+      SendMessage: WebSockets-SendMessage
+      # StateMachineStateName: Lambda function name (service-function)
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  # package:
+  #   individually: true
+  stage: ${opt:stage, 'Dev'}
+  region: ${opt:region, 'us-east-1'}
+  apiGateway:
+    minimumCompressionSize: 1024 # Enable gzip compression for responses > 1 KB
+  environment: ${file(.devcontainer/scripts/serverless-offline/loadEnvironment.js)}
+  lambdaHashingVersion: 20201221
+  tracing:
+    lambda: true
+    apiGateway: true
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - xray:PutTraceSegments
+        - xray:PutTelemetryRecords
+      Resource: "*"
+
+resources:
+  Resources: ${file(.devcontainer/scripts/serverless-offline/loadResources.js)}
+
+functions: ${file(.devcontainer/scripts/serverless-offline/loadFunctions.js)}
+
+stepFunctions:
+  stateMachines: ${file(.devcontainer/scripts/serverless-offline/loadStateMachines.js)}

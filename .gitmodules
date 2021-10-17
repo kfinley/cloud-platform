@@ -1,0 +1,45 @@
+[submodule "submodules/serverless-offline"]
+	path = submodules/serverless-offline
+	url = https://github.com/kfinley/serverless-offline.git
+[submodule "submodules/aws-ses-local"]
+	path = submodules/aws-ses-local
+	url = https://github.com/kfinley/aws-ses-local.git
+[submodule "submodules/cognito-local"]
+	path = submodules/cognito-local
+	url = https://github.com/kfinley/cognito-local.git
+[submodule "submodules/serverless-offline-step-functions"]
+	path = submodules/serverless-offline-step-functions
+	url = https://github.com/kfinley/serverless-offline-step-functions.git
+[submodule "dotnet"]
+	path = dotnet
+	url = https://github.com/kfinley/cloud-platform-dotnet
+[submodule "services/User"]
+	path = services/User
+	url = https://github.com/kfinley/cloud-platform-user-service
+[submodule "services/WebSockets"]
+	path = services/WebSockets
+	url = https://github.com/kfinley/cloud-platform-websockets
+[submodule "packages/api-client"]
+	path = packages/api-client
+	url = https://github.com/kfinley/cloud-platform-api-client.git
+[submodule "packages/commands"]
+	path = packages/commands
+	url = https://github.com/kfinley/cloud-platform-commands
+[submodule "packages/core"]
+	path = packages/core
+	url = https://github.com/kfinley/cloud-platform-core
+[submodule "packages/aws-commands"]
+	path = packages/aws-commands
+	url = https://github.com/kfinley/cloud-platform-aws-commands
+[submodule "packages/vue2-user-plugin"]
+	path = packages/vue2-user-plugin
+	url = https://github.com/kfinley/cloud-platform-vue2-user-plugin
+[submodule "packages/vue2-components-plugin"]
+	path = packages/vue2-components-plugin
+	url = https://github.com/kfinley/cloud-platform-vue2-components-plugin
+[submodule "packages/vue2-test-utils"]
+	path = packages/vue2-test-utils
+	url = https://github.com/kfinley/cloud-platform-vue2-test-utils
+[submodule "packages/vue2-notify-plugin"]
+	path = packages/vue2-notify-plugin
+	url = https://github.com/kfinley/cloud-platform-vue2-notify-plugin
