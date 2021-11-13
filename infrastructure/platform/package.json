@@ -1,0 +1,35 @@
+{
+  "name": "@cloud-platform/infrastructure-platform",
+  "version": "0.0.1",
+  "bin": {
+    "main": "bin/platform.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "jest",
+    "cdk": "cdk",
+    "cfn-nag:cs": "docker run --entrypoint cfn_nag_scan --rm -v /var/lib/docker/codespacemount/workspace/cloud-platform/:/cloud-platform -w /cloud-platform/infrastructure/platform/cdk.out alpine/cfn-nag -i . -t '/*.template.json'"
+  },
+  "devDependencies": {
+    "@aws-cdk/assert": "1.132.0",
+    "@cloud-platform/infrastructure-user-service": "0.0.1",
+    "@cloud-platform/infrastructure-websockets-service": "0.0.1",
+    "@types/jest": "^26.0.10",
+    "@types/node": "10.17.27",
+    "aws-cdk": "1.132.0",
+    "jest": "^26.4.2",
+    "ts-jest": "^26.2.0",
+    "ts-node": "^9.0.0",
+    "typescript": "~3.9.7"
+  },
+  "dependencies": {
+    "@aws-cdk/aws-ec2": "^1.132.0",
+    "@aws-cdk/aws-ecr": "^1.132.0",
+    "@aws-cdk/aws-ecr-assets": "^1.132.0",
+    "@aws-cdk/aws-ecs": "^1.132.0",
+    "@aws-cdk/core": "1.132.0",
+    "cdk-ecr-deployment": "^0.0.80",
+    "source-map-support": "^0.5.16"
+  }
+}
