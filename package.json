@@ -24,7 +24,8 @@
     "containers:restart": "./.devcontainer/scripts/local-containers.sh restart",
     "containers:start": "./.devcontainer/scripts/local-containers.sh start",
     "containers:stop": "./.devcontainer/scripts/local-containers.sh stop",
-    "outdated-packages": "./.devcontainer/scripts/outdated-packages.sh"
+    "outdated-packages": "./.devcontainer/scripts/outdated-packages.sh",
+    "update-submodules": "git submodule foreach git pull"
   },
   "engines": {
     "node": ">=14.15.0"
