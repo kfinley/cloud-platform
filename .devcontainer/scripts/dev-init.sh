@@ -10,7 +10,7 @@ sudo chmod 777 /var/run/docker-host.sock
 # Run npm & lerna installs
 if ! [ -d './node_modules' ]; then
     npm install
-    npm run bootstrap:1
+    npm run bootstrap
 else
     echo 'Existing repo setup... skipping npm & lerna setup.'
 fi

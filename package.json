@@ -8,7 +8,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "bootstrap": "lerna bootstrap",
+    "bootstrap": "lerna bootstrap --concurrency=2",
     "bootstrap:1": "lerna bootstrap --concurrency=1",
     "clean": "lerna clean --yes",
     "super-clean": "rm -rf node_modules && rm -rf package-lock.json && npm run clean && lerna exec -- rm package-lock.json || true",
