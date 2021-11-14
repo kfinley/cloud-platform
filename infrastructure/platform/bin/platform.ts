@@ -14,9 +14,6 @@ const main = new MainStack(app, 'MainStack', {
   cidr: VPC_CIDR
 });
 
-if (main.nginxImage == undefined) {
-  throw new Error('nginxImage undefined')
-}
 new UserStack(app, 'UserStack', {
   vpc: main.vpc,
   nginxImage: main.nginxImage,

@@ -1,1 +1,15 @@
-{}
+{
+    "LambdaClient": {
+      "credentials": {
+        "accessKeyId": "local",
+        "secretAccessKey": "local"
+      },
+      "region": "us-east-1"
+    },
+    "TriggerFunctions": {},
+    "UserPoolDefaults": {
+      "Id": "local",
+      "UsernameAttributes": ["email"]
+    }
+  }
+  

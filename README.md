@@ -2,9 +2,9 @@
 
 ## !Experimental! ##
 
-This is a template for a cloud based platform using a hybrid of Microservices and Serverless based back end. The system is built using C# [.NET Core](https://github.com/dotnet/core) and TypeScript as the primary languages where C# and TypeScript are used for Serverless functions, C# is used for Microservices, and TypeScript is used with a [VueJs](https://github.com/vuejs/vue) front end.
+This is a template for a AWS targeted cloud platform using Microservices and Serverless based back ends. The system is built using C# [.NET Core](https://github.com/dotnet/core) and TypeScript as the primary languages where C# and TypeScript are used for Serverless functions, C# is used for Microservices, and TypeScript is used for IaC using [AWS CDK](https://github.com/aws/aws-cdk) and the front end whih uses [VueJs](https://github.com/vuejs/vue).
 
-This setup provides a full local development environment with AWS services running locally using [VSCode Dev Containers](https://code.visualstudio.com/docs/remote/create-dev-container) or [GitHub Codespaces](https://github.com/features/codespaces).
+This setup provides a full local development environment with AWS services running locally using [VSCode Dev Containers](https://code.visualstudio.com/docs/remote/create-dev-container) or [GitHub Codespaces](https://github.com/features/codespaces), Docker, and [Serverless Framework](https://www.serverless.com) using [Serverless Offline](https://github.com/dherault/serverless-offline) (Serverless Framework is not used for deployments and is only used for local development).
 
 The template currently includes a Vue2 client and two services (User and WebSockets). 
 
@@ -23,6 +23,7 @@ The main structure of the repo is:
 ```
 ├── .devcontainer
 ├── dotnet
+├── infrastructure
 ├── packages
 ├── services
 └── submodules
@@ -33,6 +34,9 @@ This directory contains VS Code development container files as well as additiona
 
 #### dotnet
 Git Submodule for shared .NET Core projects. Repo located at https://github.com/kfinley/cloud-platform-dotnet
+
+#### infrastructure
+This directory contains the AWS CDK app (platform) and shared cdk libraries as well as other infrastructure related assets such as Docker files. Each service package has it's own infrastructure folder which handles all infrastructure as code for that service. (More details on this in the Infrastructure as Code section below)
 
 #### packages
 This directory contains any shared TypeScript projects/submodules as well as front end client packages.
@@ -62,6 +66,41 @@ At a high level the back end looks like this...
 * Data : S3, MySql, DynamoDB
 * Auth : Cognito
 
+### Infrastructure as Code
+AWS CDK is used for generating CloudFormation and deploying it to AWS. The `infrastructure/platform` package contains a CDK application which includes the following stacks.
+
+* Main Stack
+* User Stack
+* WebSockets Stack
+
+The Main stack contains shared resources. The User and WebSockets stack contain resources related to the User and WebSockets services respectively. Each service maintains it's own CDK library which includes a top level Stack class which can be used by the Platform app as well as any additional classes / cdk constructs needed by the service. Shared cdk constructs are located in the `infrastructure/core` package.
+
+
+#### Services Cloud Config
+For service application level AWS resources (such as SNS Topics / Subscriptions, Lambda Functions, S3 buckets, Step Functions, etc.) each service has resources defined in various files located under an `infrastructure` folder.
+
+These files include:
+```
+├── environment.yml
+├── functions.yml
+├── resources.yml
+└── stateMachines.yml
+```
+
+These files are used by the CDK projects for deployment to AWS and for local development using Serverless Framework and Serverless Offline. The files use the Serverless Framework format for defining the corresponding sections on a standard `serverless.yml` file. ([Here](https://www.serverless.com/framework/docs/providers/aws/guide/serverless.yml/) is a list of all available properties in serverless.yml when the provider is set to aws.)
+
+Details on each files contents:
+##### environment.yml
+Contains environment variables to be loaded for any Lambda Function or container.
+
+##### functions.yml
+Contains service Lambda Function definitions
+
+##### resources.yml
+Contains cloud resource definitions such as DynamoDB Tables, SNS Topics/Subscriptions, S3 buckets, etc.
+
+##### stateMachines.yml
+Contains AWS StepFunction definitions
 ### Local Development
 
 In order to have a close match between Production and Development code execution paths all cloud based process flows and systems are run locally using various open source projects and AWS provided components.
@@ -97,9 +136,9 @@ In addition to a container running Serverless Offline there are several other co
 The front end Vue client is run in a container (cloud-platform.web) using [Vite](https://github.com/vitejs/vite).
 
 ##### TypeScript package management
-[Lerna](https://github.com/lerna/lerna) is used to manage package code sharing across all javascript based projects.
+[Lerna](https://github.com/lerna/lerna) is used to manage package code sharing across all npm based projects.
 
-This includes packages located under the `packages` and `services` folders.
+This includes packages located under the `packages`, `services`, and `infrastructure` folders.
 
 ##### .net core debugging
 Each .net based service is running in a seperate container that can be attached to for debugging. There are VSCode tasks configured to attach each service to it's corresponding container. More info on attaching to a remote container can be found [here](https://code.visualstudio.com/docs/remote/attach-container).
@@ -108,28 +147,6 @@ These containers are not currently set to auto restart on changes so the contain
 
 Each service can also be launched locally. In this case stop the container running the service then select the desired 'Launch #SERVICE_NAME# Api' VSCode task.
 
-#### Services Cloud Config
-Each service has it's resources defined in various files located under an `infrastructure` folder.
-
-These files include:
-```
-├── environment.yml
-├── functions.yml
-├── resources.yml
-└── stateMachines.yml
-```
-
-##### environment.yml
-Contains environment variables to be loaded for any Lambda Function or container.
-
-##### functions.yml
-Contains service Lambda Function definitions
-
-##### resources.yml
-Contains cloud resource definitions such as DynamoDB Tables, SNS Topics/Subscriptions, S3 buckets, etc.
-
-##### stateMachines.yml
-Contains AWS StepFunction definitions
 
 ### Storybooks
 Each Vue plugin package has it's own [Storybook](https://github.com/storybookjs/storybook) configured.

@@ -15,7 +15,7 @@
     "dev:init": "./.devcontainer/scripts/dev-init.sh",
     "dev:client": "lerna run dev --stream --scope=@cloud-platform/vue2-client",
     "dev:client:docker": "lerna run dev:docker --stream --scope=@cloud-platform/vue2-client",
-    "dev:sls": "sls offline start",
+    "dev:sls": "npm run ses:copy-templates && sls offline start",
     "storybook:components": "lerna run storybook --stream --scope=@cloud-platform/vue2-components-plugin",
     "storybook:notify": "lerna run storybook --stream --scope=@cloud-platform/vue2-notify-plugin",
     "storybook:user": "lerna run storybook --stream --scope=@cloud-platform/vue2-user-plugin",
@@ -25,7 +25,8 @@
     "containers:start": "./.devcontainer/scripts/local-containers.sh start",
     "containers:stop": "./.devcontainer/scripts/local-containers.sh stop",
     "outdated-packages": "./.devcontainer/scripts/outdated-packages.sh",
-    "update-submodules": "git submodule foreach git pull"
+    "update-submodules": "git submodule foreach git pull",
+    "ses:copy-templates": "cp services/User/EmailTemplates/ConfirmRegistrationTemplate.json .devcontainer/.ses/email-templates/"
   },
   "engines": {
     "node": ">=14.15.0"

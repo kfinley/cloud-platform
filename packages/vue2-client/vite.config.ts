@@ -23,9 +23,9 @@ export default defineConfig({
   // },
   css: {
     preprocessorOptions: {
-    //   scss: {
-    //     additionalData: `@import "@platform8/web-ui/src/styles/_variables.scss";`
-    //   }
+      scss: {
+        additionalData: `@import "@cloud-platform/vue2-components-plugin/src/styles/_variables.scss";`
+      }
     }
   },
   build: {

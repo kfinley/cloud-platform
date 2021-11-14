@@ -1,1 +1,14 @@
-{}
+{
+    "Clients": {
+      "77ten9enat274r0m7a21bw0n9": {
+        "ClientId": "77ten9enat274r0m7a21bw0n9",
+        "ClientName": "user_local_client",
+        "UserPoolId": "us-east-1_local",
+        "CreationDate": 1624987850105,
+        "LastModifiedDate": 1624987850105,
+        "AllowedOAuthFlowsUserPoolClient": false,
+        "RefreshTokenValidity": 30
+      }
+    }
+  }
+  
