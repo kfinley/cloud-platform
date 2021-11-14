@@ -22,6 +22,7 @@
     "@cloud-platform/vue2-components-plugin": "0.0.1",
     "@cloud-platform/vue2-user-plugin": "0.0.1",
     "@cloud-platform/vue2-notify-plugin": "0.0.1",
+    "@cloud-platform/vue2-websockets-plugin": "0.0.1",
     "bootstrap": "^5.1.1",
     "bootstrap-icons": "^1.5.0",
     "core-js": "^3.6.5",

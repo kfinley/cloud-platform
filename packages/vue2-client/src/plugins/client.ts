@@ -10,13 +10,14 @@ import { extend } from 'vee-validate';
 import { RouteNames } from "../router";
 import { setupValidation } from '@cloud-platform/vue2-components-plugin/src/validation';
 import { NotificationPlugin } from "@cloud-platform/vue2-notify-plugin/src";
-// import { WebSocketsPlugin } from "@cloud-platform/vue2-websockets/src";
-// import { WebSocketsModule } from '@cloud-platform/vue2-websockets/src/store/webSocketsModule';
+import { WebSocketsPlugin } from "@cloud-platform/vue2-websockets-plugin/src";
+import { WebSocketsModule } from '@cloud-platform/vue2-websockets-plugin/src/store/webSocketsModule';
 import { UserPlugin } from "@cloud-platform/vue2-user-plugin/src";
 import { RegistrationModule, UserModule } from '@cloud-platform/vue2-user-plugin/src/store/store-modules';
 import { NotificationState } from '@cloud-platform/vue2-notify-plugin/src/store';
 import { UserState, RegistrationState } from '@cloud-platform/vue2-user-plugin/src/store';
-//import { config } from '@cloud-platform/src/config';
+import { AuthStatus } from '@cloud-platform/vue2-user-plugin/src/store';
+import { config } from '@cloud-platform/core/src/config';
 
 import "bootstrap/dist/css/bootstrap.css";
 import "@cloud-platform/vue2-components-plugin/src/styles/styles.scss";
@@ -49,20 +50,20 @@ const plugin = {
         DefaultRoute: RouteNames.Home
       });
 
-      //   vue.use(WebSocketsPlugin, {
-      //     router: options.router,
-      //     store: options.store,
-      //     connectOnChangedGetter: () => (<UserState>options.store.state.User).authStatus,
-      //     connectOnChangedValue: AuthStatus.LoggedIn,
-      //     url: `${config.WebSocket}:${config.WebSocketPort}`
-      //   });
+      vue.use(WebSocketsPlugin, {
+        router: options.router,
+        store: options.store,
+        connectOnChangedGetter: () => (<UserState>options.store.state.User).authStatus,
+        connectOnChangedValue: AuthStatus.LoggedIn,
+        url: `${config.WebSocket}:${config.WebSocketPort}`
+      });
 
       //HACK: Calls to Vuex.registerModule inside plugins will wipe out the store getters.
       //      so we must call getModule for any module that got wiped out.
       //      https://github.com/vuejs/vuex/blob/d65d14276e87aca17cfbd3fbf4af9e8dbb808f24/src/store.js#L265
       //      https://github.com/championswimmer/vuex-module-decorators/issues/250
       //
-      //   getModule(WebSocketsModule, options.store);
+      getModule(WebSocketsModule, options.store);
       getModule(UserModule, options.store);
       getModule(RegistrationModule, options.store);
 

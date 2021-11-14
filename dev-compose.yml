@@ -88,7 +88,7 @@ services:
     ports:
       - 8001:8001
     environment:
-      DYNAMO_ENDPOINT: http://platform.dynamodb:8000
+      DYNAMO_ENDPOINT: http://cloud-platform.dynamodb:8000
 
   cloud-platform.sls:
     container_name: cloud-platform.sls
