@@ -45,4 +45,4 @@
 	url = https://github.com/kfinley/cloud-platform-vue2-notify-plugin
 [submodule "packages/vue2-websockets-plugin"]
 	path = packages/vue2-websockets-plugin
-	url = git@github.com:kfinley/cloud-platform-vue2-websockets-plugin.git
+	url = https://github.com/kfinley/cloud-platform-vue2-websockets-plugin
