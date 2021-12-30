@@ -11,9 +11,9 @@ if ! [ -f "./.devcontainer/vsdbg/vsdbg" ]; then
     # Set the runtime to linux-musl-x64 since we're using alpine images to run dotnet services in devcontainer
     curl -sSL https://aka.ms/getvsdbgsh | bash /dev/stdin -v latest -r linux-musl-x64 -l ./.devcontainer/vsdbg
 
-    if [ ! -n "$(grep "^github.com " ~/.ssh/known_hosts)" ]; then
-      ssh-keyscan github.com >> ~/.ssh/known_hosts 2>/dev/null;
-    fi
+    # if [ ! -n "$(grep "^github.com " ~/.ssh/known_hosts)" ]; then
+    #   ssh-keyscan github.com >> ~/.ssh/known_hosts 2>/dev/null;
+    # fi
 
     echo "Updating git submodules..."
     echo ''
