@@ -1,8 +1,8 @@
 {
     "packages": [
       "packages/*",
-      "services/*"
+      "services/WebSockets",
+      "services/User/infrastructure/cdk"
     ],
     "version": "0.0.1"
   }
-  
