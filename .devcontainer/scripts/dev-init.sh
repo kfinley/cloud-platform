@@ -18,15 +18,6 @@ else
 fi
 
 echo
-if [[ $(dotnet --list-sdks) == *"3.1"* ]]; then
-  echo 'Dotnet core 3.1 SDK found.'
-else
-  echo 'Installing dotnet core 3.1 SDK for AWS Lambda support...'
-  # Install .net 3.1 for building lambda packages
-  curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --runtime aspnetcore --version 3.1.17
-fi
-
-echo
 if [[ $(dotnet lambda) == *'Amazon Lambda Tools for .NET Core applications'* ]]; then
   echo 'Skipping dotnet tools install...'
 else

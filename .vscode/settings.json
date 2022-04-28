@@ -8,4 +8,5 @@
   ],
   "storyExplorer.server.internal.enabled": false,
   "storyExplorer.server.external.url": "http://localhost:6007",
+  "omnisharp.useModernNet": true,
 }

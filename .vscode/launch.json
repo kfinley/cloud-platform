@@ -20,7 +20,7 @@
       "request": "launch",
       "preLaunchTask": "build-user-service",
       // If you have changed target frameworks, make sure to update the program path.
-      "program": "${workspaceFolder}/services/User/Api/bin/Debug/net5.0/User.Api.dll",
+      "program": "${workspaceFolder}/services/User/Api/bin/Debug/net6.0/User.Api.dll",
       "args": [],
       "cwd": "${workspaceFolder}/services/User/Api",
       "stopAtEntry": false,
