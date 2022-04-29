@@ -20,11 +20,6 @@ if ! [ -f "./.devcontainer/vsdbg/vsdbg" ]; then
     # Pull down submodules (customized serverless-offline plugins)
     git submodule update --init --recursive
 
-    echo 'Building Serverless-Offline'
-    echo ''
-    # Build Serverless-Offline
-    cd submodules/serverless-offline && npm i
-
 else
     echo "Existing dev container... skipping installs."
 fi

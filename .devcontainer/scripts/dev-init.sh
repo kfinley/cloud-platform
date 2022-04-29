@@ -38,6 +38,13 @@ echo 'Building lambda packages and dotnet projects...'
 dotnet build ./services/services.sln
 
 echo
+echo 'Building Serverless-Offline'
+#TODO: npm script this
+cd submodules/serverless-offline
+npm i && npm run build
+cd ../..
+
+echo
 echo 'Restarting containers...'
 # ensure services, sls, and vite dev client are started
 npm run containers:restart
