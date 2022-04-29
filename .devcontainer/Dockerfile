@@ -49,6 +49,10 @@ RUN echo "#!/bin/sh\n\
     \"\$@\"" >> /usr/local/share/docker-init.sh \
     && chmod +x /usr/local/share/docker-init.sh
 
+# run the installation script
+RUN curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh \
+    && /bin/zsh ~/.zshrc
+
 # VS Code overrides ENTRYPOINT and CMD when executing `docker run` by default.
 # Setting the ENTRYPOINT to docker-init.sh will configure non-root access to
 # the Docker socket if "overrideCommand": false is set in devcontainer.json.

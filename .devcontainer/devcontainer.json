@@ -64,6 +64,16 @@
 
     // "mounts": [ "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind" ],
 
+    "settings": {
+        // "terminal.integrated.shell.linux": "/bin/zsh"
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "terminal.integrated.profiles.linux": {
+            "zsh": {
+                "path": "/bin/zsh"
+            },
+        }
+    },
+    
     "initializeCommand": "./.devcontainer/scripts/init-workspace.sh",
 
     "postStartCommand": "npm run dev:init",
