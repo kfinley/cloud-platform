@@ -9,4 +9,7 @@
   "storyExplorer.server.internal.enabled": false,
   "storyExplorer.server.external.url": "http://localhost:6007",
   "omnisharp.useModernNet": true,
+  "dotfiles.installCommand": "~/.dotfiles/dev-container-install.sh",
+  "dotfiles.repository": "https://github.com/kfinley/dotfiles.git",
+  "dotfiles.targetPath": "~/.dotfiles"
 }
